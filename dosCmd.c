@@ -14,31 +14,38 @@ void dosInterpreter(char *dosCmd, char *arg1, char *arg2) {
         if (strlen(arg1)<1){
             print("not a valid argument");
         }
-        SetCurrentDirectory(arg1);
+        strcat(dosCmd,arg1);
+        system(dosCmd);
     }
-    // dir
+    // dir: gives a list of files in the directory
     else if (strcmp(dosCmd, "dir") == 0) {
-//        directory=opendir(".");        
-
-    }
-     // type
-    else if (strcmp(dosCmd, "type") == 0) {
-       
-
-    }
-    // del
-    else if (strcmp(dosCmd, "del") == 0) {
+//        directory=opendir(".");   
+         system("ls");
         
+    }
+     //type
+    else if (strcmp(dosCmd, "type") == 0) {
+        
+        if (strlen(arg1)<1){
+            print("not a valid argument");
+        system("cat");
+
+    }
+    // del: deletes the file in the directory, 
+    else if (strcmp(dosCmd, "del") == 0) {
+         
+        
+        system("rm");
 
     }
     // ren
     else if (strcmp(dosCmd, "ren") == 0) {
-        
+         system("mv");
 
     }
-// copy
+//copy
     else if (strcmp(dosCmd, "copy") == 0) {
-        
+         system("cp");
      
     }
     // pwd
@@ -51,5 +58,6 @@ void dosInterpreter(char *dosCmd, char *arg1, char *arg2) {
         printf("Please enter valid commands");
     }
 }
+
 
 
