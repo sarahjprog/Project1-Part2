@@ -8,6 +8,8 @@ void run_program(char** args){
         return;
     }
 
+    // Child process (pid 0) executes our command
+    // Main process waits until child process finishes
     if (pid == 0) {
         execvp(args[0], args);
         perror("execvp");

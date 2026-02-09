@@ -11,6 +11,8 @@
 #define BUF_SIZE 256
 #define MAX_ARGS 2
 
+// Project directions say to use case statement to evaluate commands
+// Strings cannot be evaluated in a switch-case so parse_command() evaluates them to enum value
 typedef enum {
     CMD_CD,
     CMD_DIR,
