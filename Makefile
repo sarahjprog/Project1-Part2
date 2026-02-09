@@ -1,12 +1,22 @@
-dosInterpreter: dosInterpreter.o dosCmd.o
-	xlc -q64 -o dosInterpreter dosInterpreter.o dosCmd.o
+CC = gcc
+CFLAGS = -Wall -Wextra -g -Iinclude
+LDFLAGS =
+BUILD = build
 
-dosInterpreter.o: dosInterpreter.c
-	xlc -q64 -c -g dosInterpreter.c
+SRC := $(wildcard src/*.c)
+OBJ := $(patsubst src/%, $(BUILD)/%, $(SRC:.c=.o))
 
-dosCmd.o: dosCmd.c
-	xlc -q64 -c -g dosCmd.c
+all: $(BUILD)/dosInterpreter
 
-.PHONY: clean
+$(BUILD)/dosInterpreter: $(OBJ)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+$(BUILD)/%.o: src/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f dosInterpreter *.o *.dbg
+	rm -rf $(BUILD)
+
+.PHONY: all clean
