@@ -18,6 +18,9 @@ void interpret_command(char** args) {
             }
             // cd is a shell builtin not a program so we use chdir to change the process working directory path
             chdir(args[1]);
+            args[0] = "pwd";
+            args[1] = NULL;
+            run_program(args);
             break;
         
         case CMD_DIR:
